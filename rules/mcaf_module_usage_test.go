@@ -21,7 +21,7 @@ resource "aws_instance" "web" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewAwsInstanceExampleTypeRule(),
+					Rule:    NewMcafModuleUsageRule(),
 					Message: "instance type is t2.micro",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -33,7 +33,7 @@ resource "aws_instance" "web" {
 		},
 	}
 
-	rule := NewAwsInstanceExampleTypeRule()
+	rule := NewMcafModuleUsageRule()
 
 	for _, test := range tests {
 		t.Run(test.Name, func(t *testing.T) {

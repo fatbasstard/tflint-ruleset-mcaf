@@ -4,19 +4,17 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/plugin"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-template/rules"
+	"github.com/terraform-linters/tflint-ruleset-terraform/project"
+	"github.com/terraform-linters/tflint-ruleset-terraform/terraform"
 )
 
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
-		RuleSet: &tflint.BuiltinRuleSet{
-			Name:    "template",
-			Version: "0.1.0",
-			Rules: []tflint.Rule{
-				rules.NewAwsInstanceExampleTypeRule(),
-				rules.NewAwsS3BucketExampleLifecycleRule(),
-				rules.NewGoogleComputeSSLPolicyRule(),
-				rules.NewTerraformBackendTypeRule(),
+		RuleSet: &terraform.RuleSet{
+			BuiltinRuleSet: tflint.BuiltinRuleSet{
+				Name:    "mcaf",
+				Version: project.Version,
 			},
-		},
-	})
+			PresetRules: rules.PresetRules,
+		}})
 }
